@@ -1,0 +1,143 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 70%;
+}
+
+body {
+	font: normal 1.2rem sans-serif;
+}
+
+h2 {
+	margin-bottom: 15px;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.name,
+.list {
+	width: 30%;
+}
+
+.bar,
+#map {
+	width: 70%;
+}
+
+.name {
+	height: 60px;
+	padding: 10px;
+	background-color: #e9e5dc;
+}
+
+.list {
+	background-color: #404040;
+	height: calc(100vh - 60px);
+	overflow-y: scroll;
+}
+
+.bar {
+	padding: 10px 0 0 10px;
+}
+
+.filter {
+	width: 100%;
+}
+
+input {
+	width: 85%;
+	padding: 0 5px;
+	font: normal 1.2rem/2 sans-serif;
+	border-radius: 2px;
+	border: 2px solid #999;
+}
+
+input:focus {
+	outline: 0;
+}
+
+img,
+input {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+li {
+	padding: 10px;
+	font: normal 1.2rem sans-serif;
+	color: #fff;
+}
+
+li:hover {
+	background-color: #fff;
+	color: #666;
+	cursor: pointer;
+}
+
+.google-error {
+	padding: 10%;
+	color: #da6161;
+	font: bold 2rem sans-serif;
+}
+
+@media screen and (min-width: 600px) {
+	html {
+		font-size: 70%;
+	}
+}
+
+@media screen and (min-width: 800px) {
+
+	html {
+		font-size: 80%;
+	}
+	.name,
+	.list {
+		width: 25%;
+	}
+	.bar,
+	#map {
+		width: 75%;
+	}
+}
+
+@media screen and (min-width: 1100px) {
+	html {
+		font-size: 100%;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+
+	.name,
+	.list {
+		width: 20%;
+	}
+
+	.bar,
+	#map {
+		width: 80%;
+	}
+}
+
+@media screen and (min-width: 2000px) {
+
+	.name,
+	.list {
+		width: 15%;
+	}
+
+	.bar,
+	#map {
+		width: 85%;
+	}
+}
