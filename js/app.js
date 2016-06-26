@@ -11,6 +11,13 @@ var FOURSQUARE_REQUEST_SETTING = {
 };
 var FOURSQUARE_BASE_URL = "https://api.foursquare.com/v2/venues/explore?oauth_token=P5LKHSBP44HASISJWX4QVDQH3NZ31OY02WEWQ2PQUYP4OXYX";
 
+/**
+ * Creates an instance of VenueModel.
+ *
+ * @constructor
+ * @this {VenueModel}
+ * @param {data} response data to the request.
+ */
 var VenueModel = function (data) {
     var lat = data.venue.location.lat;
     var lng = data.venue.location.lng;
@@ -28,7 +35,11 @@ var VenueModel = function (data) {
     });
 }
 
-// Bounce marker
+/**
+ * Bounce a marker.
+ *
+ * @this {VenueModel}
+ */
 VenueModel.prototype.bounce = function() {
     var obj;
     if (this.hasOwnProperty('marker')) {
@@ -42,7 +53,11 @@ VenueModel.prototype.bounce = function() {
     }, 1000);
 }
 
-// Information
+/**
+ * Pop up infowindow for a marker.
+ *
+ * @this {VenueModel}
+ */
 VenueModel.prototype.info = function() {
     var contentString = '<div class="markerInfo"><p id="locationName">' +
         this.name() + '</p><p id="locationAddress">' + this.contact +
@@ -51,16 +66,25 @@ VenueModel.prototype.info = function() {
     infoWindow.open(map, this.marker);
 }
 
-// Animation
+/**
+ * Animation for a marker when it is clicked.
+ *
+ * @this {VenueModel}
+ */
 VenueModel.prototype.animate = function() {
     this.bounce();
     this.info();
 }
 
+/**
+ * ViewModel of the map.
+ *
+ * @this {MapViewModel}
+ */
 var MapViewModel = function() {
     var self = this;
     self.venues = ko.observableArray([]); // all venues
-    self.keyword = ko.observable('');
+    self.keyword = ko.observable('');   // keyword for search
     self.foursquareVenues = ko.observableArray([]); //list of venues from Foursquare API
 
     $.getJSON(FOURSQUARE_BASE_URL, FOURSQUARE_REQUEST_SETTING).done(function(data) {
@@ -79,9 +103,11 @@ var MapViewModel = function() {
     });
 
     self.displayVenues = ko.computed(function() {
-        return self.venues().filter(function(venue) {
+        return self.venues().filter(function(venue) {   // filter for the array
+            // display the venues which can match the keyword
             if (venue.name().toLowerCase().indexOf(self.keyword().toLowerCase()) > -1) {
                 venue.marker.setMap(map);
+                // add listener for the displayed markers
                 venue.marker.addListener('click', function(){
                     map.panTo(venue.position);
                     venue.animate();
@@ -92,7 +118,7 @@ var MapViewModel = function() {
                 return false;
             }
         });
-    }); //list of venues to display
+    }); 
 }
 
 function initMap() {
