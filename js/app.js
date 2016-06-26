@@ -31,15 +31,15 @@ var VenueModel = function (data) {
 // Bounce marker
 VenueModel.prototype.bounce = function() {
     var obj;
-  	if (this.hasOwnProperty('marker')) {
-    	obj = this.marker;
-  	} else {
-    	obj = this;
-  	}
-  	obj.setAnimation(google.maps.Animation.BOUNCE);
-  	setTimeout(function() {
-	    obj.setAnimation(null);
-  	}, 1000);
+    if (this.hasOwnProperty('marker')) {
+        obj = this.marker;
+    } else {
+        obj = this;
+    }
+    obj.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+        obj.setAnimation(null);
+    }, 1000);
 }
 
 // Information
@@ -53,8 +53,8 @@ VenueModel.prototype.info = function() {
 
 // Animation
 VenueModel.prototype.animate = function() {
-	this.bounce();
-	this.info();
+    this.bounce();
+    this.info();
 }
 
 var MapViewModel = function() {
@@ -83,9 +83,9 @@ var MapViewModel = function() {
             if (venue.name().toLowerCase().indexOf(self.keyword().toLowerCase()) > -1) {
                 venue.marker.setMap(map);
                 venue.marker.addListener('click', function(){
-				    map.panTo(venue.position);
-				    venue.animate();
-				});
+                    map.panTo(venue.position);
+                    venue.animate();
+                });
                 return true;
             } else {
                 venue.marker.setMap(null);
@@ -106,5 +106,5 @@ var googleSuccess = function() {
 }
 
 function googleMapsError() {
-	document.getElementsByClassName('map')[0].innerHTML = '<div class="google-error">Sorry, Google Map could not be loaded</div>';
+    document.getElementsByClassName('map')[0].innerHTML = '<div class="google-error">Sorry, Google Map could not be loaded</div>';
 }
